@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "58643631171",
+    "firebase_url": "https://chefio-860f4.firebaseio.com",
+    "project_id": "chefio-860f4",
+    "storage_bucket": "chefio-860f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58643631171:android:404760366bd22938a698f6",
+        "android_client_info": {
+          "package_name": "com.kar.chef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58643631171-aavbd2d1m3q9n3vc84s13rfvkqi26d7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kar.chef",
+            "certificate_hash": "1a38d7673ed80d24b2107ad9e5ed2fd98508482c"
+          }
+        },
+        {
+          "client_id": "58643631171-pvvgipf7ja4bfa1j9hhv1q2dpf7g91st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD83GfKQht_kc889_SAdeAyHwHkUm9TZAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58643631171-pvvgipf7ja4bfa1j9hhv1q2dpf7g91st.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
