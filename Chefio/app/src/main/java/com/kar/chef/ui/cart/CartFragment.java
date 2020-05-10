@@ -1,6 +1,8 @@
 package com.kar.chef.ui.cart;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +48,10 @@ import com.kar.chef.Database.LocalCartDataSource;
 import com.kar.chef.EventBus.CounterCartEvent;
 import com.kar.chef.EventBus.HideFABCart;
 import com.kar.chef.EventBus.UpdateItemInCart;
+import com.kar.chef.HomeActivity;
 import com.kar.chef.Model.Order;
 import com.kar.chef.R;
+import com.kar.chef.razorpay.TestPayment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,6 +83,8 @@ public class CartFragment extends Fragment {
     LocationCallback locationCallback;
     FusedLocationProviderClient fusedLocationProviderClient;
     Location currentLocation;
+    Activity activity;
+
     @BindView(R.id.recycler_cart)
     RecyclerView recycler_cart;
     @BindView(R.id.text_total_price)
@@ -86,6 +93,9 @@ public class CartFragment extends Fragment {
     CardView group_place_holder;
     @BindView(R.id.txt_empty_cart)
     TextView txt_empty_cart;
+    @BindView(R.id.rdi_online)
+    RadioButton rdi_online;
+
     @OnClick(R.id.btn_place_order)
     void onPlaceOrderClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -128,6 +138,7 @@ public class CartFragment extends Fragment {
                 }
             }
         });
+
 
         rdi_ship_to_this.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b)
@@ -176,6 +187,15 @@ public class CartFragment extends Fragment {
                 paymentCOD(edt_address.getText().toString(), edt_comment.getText().toString());
 
             }
+            else if(rdi_online.isChecked())
+            {
+                Intent i=new Intent(activity, TestPayment.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("total_price",text_total_price.getText().toString());
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+
         });
 
 
@@ -311,6 +331,7 @@ public class CartFragment extends Fragment {
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart,container,false);
         cartViewModel.initCartDataSource(getContext());
+        activity=getActivity();
         cartViewModel.getMutableLiveDataCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItem>>() {
             @Override
             public void onChanged(List<CartItem> cartItems) {

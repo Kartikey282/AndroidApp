@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,9 +21,9 @@ import org.json.JSONObject;
 public class TestPayment extends AppCompatActivity  implements PaymentResultListener {
 
     private Button startPayment;
-    private EditText orderAmount;
+    private TextView orderAmount;
     private String TAG = "testPayment";
-
+    String total_cost;
 
 
 
@@ -32,7 +33,14 @@ public class TestPayment extends AppCompatActivity  implements PaymentResultList
         setContentView(R.layout.payment_activity);
 
         startPayment = (Button) findViewById(R.id.start_payment);
-        orderAmount = (EditText) findViewById(R.id.order_amount);
+        orderAmount =  (TextView)findViewById(R.id.order_amount);
+
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null)
+        {
+           total_cost= getIntent().getExtras().getString("total_price");
+           orderAmount.setText(total_cost);
+        }
 
         startPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,4 +102,3 @@ public class TestPayment extends AppCompatActivity  implements PaymentResultList
         }
     }
 }
-
